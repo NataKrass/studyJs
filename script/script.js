@@ -1,1 +1,10 @@
-console.log(2);
+let money,
+    income,
+    addExpenses,
+    deposit, 
+    mission,
+    period;
+
+alert("It's working!");
+
+console.log("This is console!");
