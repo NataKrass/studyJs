@@ -27,9 +27,6 @@ money = prompt('Ваш месячный доход?');
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 deposit = confirm('Есть ли у вас депозит в банке?');
 
-let budgetDay = money / 30;
-console.log(budgetDay);
-
 function showTypeof(){
     return [typeof money, typeof income, typeof deposit];
 }
@@ -41,6 +38,9 @@ let spend = prompt('Какие обязательные ежемесячные �
     expense2 = prompt('Во сколько это обойдется?'),
     budgetMonth = + money - (parseInt(expense) + parseInt(expense2));
 console.log(budgetMonth);
+
+let budgetDay = budgetMonth / 30;
+console.log(budgetDay);
 
 let monthsForMission = + mission / budgetMonth;
 console.log('Срок достижения цели: ' + Math.ceil(monthsForMission) + ' месяцев');
