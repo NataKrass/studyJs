@@ -7,10 +7,6 @@ let money,
     mission,
     period;
 
-money = 999;
-income = '99';
-addExpenses = 'Учеба, Поездки, Одежда';
-deposit = true;
 mission = '55555';
 period = 7;
 
@@ -25,20 +21,17 @@ console.log('Цель заработать' + ' ' + mission + ' ' + 'долла�
 
 console.log(addExpenses.toLowerCase().split(', '));*/
 
-let budgetDay = money / 30;
-console.log(budgetDay);
-console.log(budgetDay%30);
-
 //lesson03
 
 money = prompt('Ваш месячный доход?');
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 deposit = confirm('Есть ли у вас депозит в банке?');
 
+let budgetDay = money / 30;
+console.log(budgetDay);
+
 function showTypeof(){
-    return(typeof money, typeof income, typeof deposit);
-    return(typeof income);
-    return(typeof deposit);
+    return [typeof money, typeof income, typeof deposit];
 }
 console.log(showTypeof());
 
