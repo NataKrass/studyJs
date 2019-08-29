@@ -45,9 +45,6 @@ console.log(budgetDay);
 let monthsForMission = + mission / budgetMonth;
 console.log('Срок достижения цели: ' + Math.ceil(monthsForMission) + ' месяцев');
 
-budgetDay = budgetMonth / 30;
-
-
 function getStatusIncome() {
     if (budgetDay >= 800){
         return ('Высокий уровень дохода');
