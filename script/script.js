@@ -1,5 +1,11 @@
 'use strict';
-
+let money = function() {
+    do {
+      appData.budget = prompt('Ваш месячный доход?', 10000);
+      console.log('Месячный доход: ' + appData.budget)
+    }
+    while(isNaN(appData.budget) || appData.budget === '' || appData.budget === null);
+};
 
 /*console.log(addExpenses.toLowerCase().split(', '));*/
 let appData = {
@@ -9,13 +15,7 @@ let appData = {
     deposit: false,
     percentDeposit: 0,
     moneyDeposit: 0,
-    budget: function() {
-        do {
-          appData.budget = prompt('Ваш месячный доход?', 10000);
-          console.log('Месячный доход: ' + appData.budget)
-        }
-        while(isNaN(appData.budget) || appData.budget === '' || appData.budget === null);
-    },
+    budget: money,
     budgetMonth: 0,
     budgetDay: 0, 
     expenseMonth: 0,
