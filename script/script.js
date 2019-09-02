@@ -7,7 +7,6 @@ let money = function() {
     while(isNaN(appData.budget) || appData.budget === '' || appData.budget === null);
 };
 
-/*console.log(addExpenses.toLowerCase().split(', '));*/
 let appData = {
     income: {},
     mission: 55555,
@@ -30,7 +29,7 @@ let appData = {
             do { 
                 itemIncome = prompt('Какой у вас есть дополнительный заработок?',
                 'Фриланс');
-                 } while( itemIncome === '' || itemIncome === null || typeof itemIncome != 'string');     
+                 } while( itemIncome === '' || itemIncome === null || /[0-9]/.test(itemIncome));     
             
             do { 
                  cashIncome = prompt('Сколько в месяц на этом зарабатываете?', 
@@ -52,7 +51,7 @@ let appData = {
             let spend;
             do { 
                 spend = prompt('Какие обязательные ежемесячные расходы у вас есть?');
-                 } while( spend === '' || spend === null || typeof spend === 'number');     
+                 } while( spend === '' || spend === null || /[0-9]/.test(spend));     
             do { 
                expense = +prompt('Во сколько это обойдется?', 500);
                appData.expenses[spend] = expense;
