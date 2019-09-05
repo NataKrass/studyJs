@@ -184,18 +184,18 @@ let appData = {
     }
 
 };
-
-document.querySelector('.main').addEventListener('click', function startButton() {
-    if(salaryAmount.value === ''){
+button.setAttribute('disabled', false);
+salaryAmount.addEventListener('input', function(){
+    if(salaryAmount === ''){
         button.setAttribute('disabled', false);
-        console.log('null')
     } else {
-        button.removeAttribute("disabled");
+        button.removeAttribute('disabled');
     }
-}); 
-periodSelect.addEventListener('click', appData.getPeriod);
+})
 
-start.addEventListener('click', appData.start);
+periodSelect.addEventListener('input', appData.getPeriod);
+
+button.addEventListener('click', appData.start);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomesBlock);
