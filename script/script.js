@@ -84,7 +84,6 @@ let appData = {
         console.log(expensesItems.length)
     },
     addIncomesBlock: function(){
-        
         let cloneIncomesItem = incomesItems[0].cloneNode(true);
         incomesItems[0].parentNode.insertBefore(cloneIncomesItem, incomePlus);
         incomesItems = document.querySelectorAll('.income-items');
@@ -96,7 +95,6 @@ let appData = {
         expensesItems.forEach(function(item){
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
-
             if(itemExpenses !== '' && cashExpenses !== ''){
                 appData.expenses[itemExpenses] = cashExpenses;
             }
@@ -107,7 +105,6 @@ let appData = {
         incomesItems.forEach(function(item){
             let incomeTitle = item.querySelector('.income-title').value;
             let incomeAmount = item.querySelector('.income-amount').value;
-
             if(incomeTitle !== '' && incomeAmount !== ''){
                 appData.income[incomeTitle] = incomeAmount;
             }
@@ -115,7 +112,6 @@ let appData = {
 
     },
     getAddExpenses: function(){
-        
         let addExpenses = expensesAdd.value.split(',');
         addExpenses.forEach(function(item){
             item = item.trim();
@@ -170,7 +166,6 @@ let appData = {
             do { 
                 appData.moneyDeposit = prompt('Какая сумма заложена?', '1000');
                 } while(isNaN(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);  
-            
         }
     },
     calcSavedMoney: function(){
@@ -182,12 +177,7 @@ let appData = {
         }) 
     },
     reset: function(){
-        location.reload()
-    //    for(let i in appData){
-    //       console.log(i);
-    //      i.reset();
-    //    } 
-       
+        location.reload();
     }
 };
 button.setAttribute('disabled', false);
