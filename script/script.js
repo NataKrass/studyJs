@@ -33,6 +33,8 @@ let expensesItems = document.querySelectorAll('.expenses-items'),
     expensesAdd = document.querySelector('.additional_expenses-item'),mb,
     addExpensesValueItem = document.querySelector('.additional_expenses-item'),
     incomeItems = document.querySelectorAll('.income-items');
+   
+
 
 const AppData = function(){
     this.income = {};
@@ -61,8 +63,11 @@ AppData.prototype.start = function() {
     this.getInfoDeposit();
     this.getBudget();
     this.statusIncome();
-    this.getAddExpenses();
-    this.getAddIncome();
+    
+    //this.getAddExpenses();
+    
+    this.getAdd(expensesAdd.value.split(','), this.addExpenses);
+    this.getAdd(addIncomeItems, this.addIncome);
     this.getAddIncomesMonth();
     this.getPeriod();
     this.showResult();
@@ -79,31 +84,14 @@ AppData.prototype.showResult = function(){
     button.style.display = 'none';
     buttonCancel.style.display = 'block'; 
 };
-AppData.prototype.addExpensesBlock = () => {
-    let cloneExpensesItem = expensesItems[0].cloneNode(true);
-    expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
-    expensesItems = document.querySelectorAll('.expenses-items');
-    if(expensesItems.length === 3){
-        expensesPlus.style.display = 'none';
-    }
-};
 
-AppData.prototype.addIncomesBlock = () => {
-    let cloneIncomesItem = incomesItems[0].cloneNode(true);
-    incomesItems[0].parentNode.insertBefore(cloneIncomesItem, incomePlus);
-    incomesItems = document.querySelectorAll('.income-items');
-    if(incomesItems.length === 3){
-        incomePlus.style.display = 'none';
-    }
-};
-AppData.prototype.addBlocks = function(arr, pluses){
-    console.log(arr);
+AppData.prototype.addBlocks = function(arr, pluses, str){
     let cloneitem = arr[0].cloneNode(true);
     arr[0].parentNode.insertBefore(cloneitem, pluses);
+    arr = document.querySelectorAll(str);
     if(arr.length === 3){
         pluses.style.display = 'none';
     }
-
 };
 AppData.prototype.getExpenses = function(){
     expensesItems.forEach(function(item){
@@ -124,20 +112,14 @@ AppData.prototype.getIncome = function(){
         }
     }, this);
 };
-AppData.prototype.getAddExpenses = () => {
-    let addExpenses = expensesAdd.value.split(',');
-    addExpenses.forEach(function(item){
-        item = item.trim();
-        if (item !== ''){
-            appData.addExpenses.push(item);
-        }
-    })  
-};
-AppData.prototype.getAddIncome = function(){
-    addIncomeItems.forEach(function(item){
-        let itemValue = item.value.trim();
-        if (itemValue !== ''){
-            this.addIncome.push(itemValue);
+AppData.prototype.getAdd = function(arr, elem){
+    arr.forEach(function(item){
+        if (item.value && item !== '') {
+            item = item.value.trim();
+            elem.push(item);
+        } else if(item && item !== '') {
+            item = item;
+            elem.push(item);
         }
     }, this);
 };
@@ -200,8 +182,8 @@ AppData.prototype.eventListeners = function(){
         appData.start();
     });
     buttonCancel.addEventListener('click', this.reset);
-    expensesPlus.addEventListener('click', this.addExpensesBlock);
-    incomePlus.addEventListener('click', this.addBlocks.bind(incomesItems, incomePlus));
+    expensesPlus.addEventListener('click', this.addBlocks.bind(this, expensesItems, expensesPlus, '.expenses-items'));
+    incomePlus.addEventListener('click', this.addBlocks.bind(this, incomesItems, incomePlus, '.income-items'));
 }
 
 checkbox.addEventListener('change', function(){
