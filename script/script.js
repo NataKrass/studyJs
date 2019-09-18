@@ -31,20 +31,24 @@ let money,
     expensesItems = document.querySelectorAll('.expenses-items'),
     incomesItems = document.querySelectorAll('.income-items');
 
-const AppData = function(){
-    this.income = {};
-    this.addIncome = [];
-    this.incomeMonth = 0;
-    this.expenses = {};
-    this.addExpenses = [];
-    this.deposit = false;
-    this.percentDeposit = 0;
-    this.moneyDeposit = 0;
-    this.budget = 0;
-    this.budgetMonth = 0;
-    this.budgetDay = 0; 
-    this.budgetPeriod = 0;
-    this.expenseMonth = 0;
+class AppData {
+    constructor(){
+       
+            this.income = {};
+            this.addIncome = [];
+            this.incomeMonth = 0;
+            this.expenses = {};
+            this.addExpenses = [];
+            this.deposit = false;
+            this.percentDeposit = 0;
+            this.moneyDeposit = 0;
+            this.budget = 0;
+            this.budgetMonth = 0;
+            this.budgetDay = 0; 
+            this.budgetPeriod = 0;
+            this.expenseMonth = 0;
+  
+}  
 };
 AppData.prototype.start = function() {
     if(salaryAmount.value === ''){
