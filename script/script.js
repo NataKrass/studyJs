@@ -23,7 +23,6 @@ const button = document.getElementById('start'),
     depositBank = document.querySelector('.deposit-bank'),
     depositAmount = document.querySelector('.deposit-amount'),
     targetAmount = document.querySelector('.target-amount'),
-    
     expensesAdd = document.querySelector('.additional_expenses-item'),
     addIncomeItems = document.querySelectorAll('.additional_income-item'),
     depositPercent = document.querySelector('.deposit-percent');
@@ -33,52 +32,50 @@ let money,
 
 class AppData {
     constructor(){
-       
-            this.income = {};
-            this.addIncome = [];
-            this.incomeMonth = 0;
-            this.expenses = {};
-            this.addExpenses = [];
-            this.deposit = false;
-            this.percentDeposit = 0;
-            this.moneyDeposit = 0;
-            this.budget = 0;
-            this.budgetMonth = 0;
-            this.budgetDay = 0; 
-            this.budgetPeriod = 0;
-            this.expenseMonth = 0;
-  
-}  
-};
-AppData.prototype.start = function() {
-    if(salaryAmount.value === ''){
-        alert('Ошибка! Поле "Месячный доход" должно быть заполнено.');
+        this.income = {};
+        this.addIncome = [];
+        this.incomeMonth = 0;
+        this.expenses = {};
+        this.addExpenses = [];
+        this.deposit = false;
+        this.percentDeposit = 0;
+        this.moneyDeposit = 0;
+        this.budget = 0;
+        this.budgetMonth = 0;
+        this.budgetDay = 0; 
+        this.budgetPeriod = 0;
+        this.expenseMonth = 0;
+    }  
+    start () {
+        if(salaryAmount.value === ''){
+            alert('Ошибка! Поле "Месячный доход" должно быть заполнено.');
+        }
+        let context = this.start.bind(appData);
+        this.budget = +salaryAmount.value;
+        this.getExpenses();
+        this.getIncome();
+        this.getExpensesMonth();
+        this.getInfoDeposit();
+        this.getBudget();
+        this.statusIncome();
+        this.getAdd(expensesAdd.value.split(','), this.addExpenses);
+        this.getAdd(addIncomeItems, this.addIncome);
+        this.getAddIncomesMonth();
+        this.getPeriod();
+        this.showResult();
     }
-    let context = this.start.bind(appData);
-    this.budget = +salaryAmount.value;
-    this.getExpenses();
-    this.getIncome();
-    this.getExpensesMonth();
-    this.getInfoDeposit();
-    this.getBudget();
-    this.statusIncome();
-    this.getAdd(expensesAdd.value.split(','), this.addExpenses);
-    this.getAdd(addIncomeItems, this.addIncome);
-    this.getAddIncomesMonth();
-    this.getPeriod();
-    this.showResult();
-};
-AppData.prototype.showResult = function(){
-    budgetMonthValue.value = Math.ceil(this.budgetMonth);
-    budgetDayValue.value =  Math.floor(+this.budgetDay);
-    expenseMonthValue.value = this.expenseMonth;
-    addExpensesValue.value = this.addExpenses.join(', ');
-    addIncomeValue.value = this.addIncome.join(', ');
-    targetMonths.value = Math.ceil(this.targetMonth());
-    incomePeriodValue.value = this.calcSavedMoney();
-    this.blockInputs();
-    button.style.display = 'none';
-    buttonCancel.style.display = 'block'; 
+    showResult () {
+        budgetMonthValue.value = Math.ceil(this.budgetMonth);
+        budgetDayValue.value =  Math.floor(+this.budgetDay);
+        expenseMonthValue.value = this.expenseMonth;
+        addExpensesValue.value = this.addExpenses.join(', ');
+        addIncomeValue.value = this.addIncome.join(', ');
+        targetMonths.value = Math.ceil(this.targetMonth());
+        incomePeriodValue.value = this.calcSavedMoney();
+        this.blockInputs();
+        button.style.display = 'none';
+        buttonCancel.style.display = 'block'; 
+    }
 };
 
 AppData.prototype.addBlocks = (arr, pluses, str) =>{
@@ -147,7 +144,6 @@ AppData.prototype.targetMonth = () => {
 AppData.prototype.statusIncome = () => {
    appData.budgetDay = appData.budgetMonth / 30;
 };
-
 AppData.prototype.calcSavedMoney = () => {
     return appData.budgetMonth * periodSelect.value;
 };
@@ -179,7 +175,6 @@ AppData.prototype.eventListeners = function(){
     expensesPlus.addEventListener('click', this.addBlocks.bind(this, expensesItems, expensesPlus, '.expenses-items'));
     incomePlus.addEventListener('click', this.addBlocks.bind(this, incomesItems, incomePlus, '.income-items'));
 }
-
 checkbox.addEventListener('change', function(){
     if(checkbox.checked){
         depositBank.style.display = 'inline-block';
